@@ -43,6 +43,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
         Article article = articleList.get(position);
         holder.user_profile.setText(article.getUsername());
         holder.tgl_profile.setText(article.getTgl_posting());
+        holder.countLiked.setText(article.getCountLiked() + "");
         if(article.getIsLiked() == 1){
             holder.likeIcon.setChecked(true);
         }else{
@@ -57,13 +58,14 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView user_profile,tgl_profile;
+        TextView user_profile,tgl_profile,countLiked;
         ImageView articleImage;
         CheckBox likeIcon;
         public ViewHolder(View itemView) {
             super(itemView);
             likeIcon = (CheckBox)itemView.findViewById(R.id.likeIcon);
             user_profile = (TextView)itemView.findViewById(R.id.user_profile);
+            countLiked = (TextView)itemView.findViewById(R.id.count);
             tgl_profile = (TextView)itemView.findViewById(R.id.tgl_profile);
             articleImage = (ImageView) itemView.findViewById(R.id.article_image);
         }

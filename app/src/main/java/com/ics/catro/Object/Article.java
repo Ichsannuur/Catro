@@ -7,6 +7,11 @@ public class Article {
     private String tgl_posting;
     private String username;
     private int isLiked;
+    private int countLiked;
+
+    public int getCountLiked() {
+        return countLiked;
+    }
 
     public String getUsername() {
         return username;
