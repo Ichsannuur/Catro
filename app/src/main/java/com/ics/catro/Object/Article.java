@@ -1,15 +1,12 @@
 package com.ics.catro.Object;
 
-/**
- * Created by Ichsan.Fatiha on 3/21/2018.
- */
-
 public class Article {
-    int id_article;
-    String article;
-    String gambar;
-    String tgl_posting;
-    String username;
+    private int id_article;
+    private String article;
+    private String gambar;
+    private String tgl_posting;
+    private String username;
+    private int isLiked;
 
     public String getUsername() {
         return username;
@@ -25,6 +22,10 @@ public class Article {
 
     public String getGambar() {
         return gambar;
+    }
+
+    public int getIsLiked() {
+        return isLiked;
     }
 
     public String getTgl_posting() {

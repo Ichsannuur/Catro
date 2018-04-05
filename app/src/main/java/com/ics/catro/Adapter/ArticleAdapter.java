@@ -43,6 +43,11 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
         Article article = articleList.get(position);
         holder.user_profile.setText(article.getUsername());
         holder.tgl_profile.setText(article.getTgl_posting());
+        if(article.getIsLiked() == 1){
+            holder.likeIcon.setChecked(true);
+        }else{
+            holder.likeIcon.setChecked(false);
+        }
         Picasso.with(context).load(R.drawable.yeezy).into(holder.articleImage);
     }
 
@@ -61,17 +66,6 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
             user_profile = (TextView)itemView.findViewById(R.id.user_profile);
             tgl_profile = (TextView)itemView.findViewById(R.id.tgl_profile);
             articleImage = (ImageView) itemView.findViewById(R.id.article_image);
-
-            likeIcon.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    if(likeIcon.isChecked() == true){
-                        Toast.makeText(context, "Yes", Toast.LENGTH_SHORT).show();
-                    }else{
-                        Toast.makeText(context, "No", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
         }
 
     }
