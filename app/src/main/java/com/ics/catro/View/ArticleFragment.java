@@ -33,6 +33,7 @@ public class ArticleFragment extends Fragment {
     RecyclerView recyclerViewArticle;
     List<Article> articleList = new ArrayList<>();
     ArticleAdapter adapter;
+    public static ArticleFragment af;
     public ArticleFragment() {
         // Required empty public constructor
     }
@@ -54,8 +55,12 @@ public class ArticleFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        loadArticle();
+    }
+
+    public void loadArticle() {
         CatroAPI api = RetrofitService.service().create(CatroAPI.class);
-        Call<Value> call = api.show_article();
+        Call<Value> call = api.show_article("ichsannuur66@gmail.com");
         call.enqueue(new Callback<Value>() {
             @Override
             public void onResponse(Call<Value> call, Response<Value> response) {

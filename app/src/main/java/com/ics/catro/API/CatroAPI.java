@@ -14,6 +14,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Query;
 
 /**
  * Created by Ichsan.Fatiha on 3/7/2018.
@@ -38,9 +39,9 @@ public interface CatroAPI {
     @GET("show_article_profile.php")
     Call<Value> show_article_profile();
 
-    @GET("show_article.php")
-    Call<Value> show_article();
+    @GET("show_article.php/email")
+    Call<Value> show_article(@Query("email") String email);
 
-    @POST("insert_like")
-    Call<Value> insert_like(@Field("id_article") String id_article,@Field("email") String email);
+    @GET("insert_like.php/option/id_article/email/id_like")
+    Call<Value> insert_like(@Query("option") String option,@Query("id_article") String id_article,@Query("email") String email,@Query("id_like") int id_like);
 }

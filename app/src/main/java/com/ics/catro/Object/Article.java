@@ -5,9 +5,15 @@ public class Article {
     private String article;
     private String gambar;
     private String tgl_posting;
+    private String email;
     private String username;
     private int isLiked;
     private int countLiked;
+    private int id_like;
+
+    public int getId_like() {
+        return id_like;
+    }
 
     public int getCountLiked() {
         return countLiked;
@@ -23,6 +29,10 @@ public class Article {
 
     public String getArticle() {
         return article;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public String getGambar() {
