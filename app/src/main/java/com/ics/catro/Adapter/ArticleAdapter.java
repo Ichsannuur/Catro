@@ -31,10 +31,12 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
 
     List<Article> articleList;
     Context context;
+    String sessionUser;
 
-    public ArticleAdapter(List<Article> articleList, Context context) {
+    public ArticleAdapter(List<Article> articleList, Context context, String sessionUser) {
         this.articleList = articleList;
         this.context = context;
+        this.sessionUser = sessionUser;
     }
 
     @Override
@@ -58,7 +60,8 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
         }else{
             holder.likeIcon.setChecked(false);
         }
-        Picasso.with(context).load("http://10.0.2.2/catro/image/"+article.getGambar()).into(holder.articleImage);
+        Picasso.with(context).load("http://10.0.2.2/catro/image/"+article.getGambar())
+                .into(holder.articleImage);
     }
 
     @Override
@@ -86,7 +89,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
                 public void onClick(View view) {
                     if (likeIcon.isChecked()){
                         CatroAPI api = RetrofitService.service().create(CatroAPI.class);
-                        Call<Value> call = api.insert_like("1",id_article.getText().toString(),"ichsannuur66@gmail.com",Integer.parseInt(id_like.getText().toString()));
+                        Call<Value> call = api.insert_like("1",id_article.getText().toString(),sessionUser,Integer.parseInt(id_like.getText().toString()));
                         call.enqueue(new Callback<Value>() {
                             @Override
                             public void onResponse(Call<Value> call, Response<Value> response) {
@@ -105,7 +108,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
                         });
                     }else{
                         CatroAPI api = RetrofitService.service().create(CatroAPI.class);
-                        Call<Value> call = api.insert_like("0",id_article.getText().toString(),"ichsannuur66@gmail.com",Integer.parseInt(id_like.getText().toString()));
+                        Call<Value> call = api.insert_like("0",id_article.getText().toString(),sessionUser,Integer.parseInt(id_like.getText().toString()));
                         call.enqueue(new Callback<Value>() {
                             @Override
                             public void onResponse(Call<Value> call, Response<Value> response) {

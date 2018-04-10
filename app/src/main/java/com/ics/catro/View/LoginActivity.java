@@ -2,7 +2,9 @@ package com.ics.catro.View;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -24,11 +26,19 @@ public class LoginActivity extends AppCompatActivity {
     EditText email,password;
     Button login;
     ProgressDialog progressDialog;
+    SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        //Preference
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        if (preferences.getString("emailId","") != null){
+            startActivity(new Intent(LoginActivity.this,MenuActivity.class));
+        }
+
         judul = (TextView)findViewById(R.id.judul);
         progressDialog = new ProgressDialog(this);
         //Font
@@ -58,6 +68,10 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (value.equals("1")){
                     progressDialog.dismiss();
+                    //Put session
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("emailId",email.getText().toString());
+                    editor.apply();
                     startActivity(new Intent(LoginActivity.this, MenuActivity.class));
                     clear_UI();
                 }else{

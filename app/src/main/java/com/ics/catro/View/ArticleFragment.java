@@ -1,7 +1,9 @@
 package com.ics.catro.View;
 
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -33,6 +35,7 @@ public class ArticleFragment extends Fragment {
     RecyclerView recyclerViewArticle;
     List<Article> articleList = new ArrayList<>();
     ArticleAdapter adapter;
+    SharedPreferences preferences;
     public static ArticleFragment af;
     public ArticleFragment() {
         // Required empty public constructor
@@ -42,6 +45,8 @@ public class ArticleFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        //Preference
+        preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_article, container, false);
         //Definisi UI
@@ -60,14 +65,14 @@ public class ArticleFragment extends Fragment {
 
     public void loadArticle() {
         CatroAPI api = RetrofitService.service().create(CatroAPI.class);
-        Call<Value> call = api.show_article("ichsannuur66@gmail.com");
+        Call<Value> call = api.show_article(preferences.getString("emailId",""));
         call.enqueue(new Callback<Value>() {
             @Override
             public void onResponse(Call<Value> call, Response<Value> response) {
                 String value = response.body().getValue();
                 if(value.equals("1")){
                     articleList = response.body().getArticle();
-                    adapter = new ArticleAdapter(articleList,getContext());
+                    adapter = new ArticleAdapter(articleList,getContext(),preferences.getString("emailId",""));
                     recyclerViewArticle.setAdapter(adapter);
                 }
             }

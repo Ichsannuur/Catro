@@ -15,17 +15,17 @@
         android:theme="@style/NoAction">
         <activity android:name=".View.RegisterUser" />
         <activity android:name=".View.LoginActivity">
-
-        </activity>
-        <activity
-            android:name=".View.MenuActivity"
-            android:label="@string/title_activity_menu"
-            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".View.MenuActivity"
+            android:label="@string/title_activity_menu"
+            android:theme="@style/AppTheme">
+
         </activity>
         <activity android:name=".View.AddArticle" android:theme="@style/NoAction2">
 
