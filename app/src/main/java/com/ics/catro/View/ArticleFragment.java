@@ -36,7 +36,6 @@ public class ArticleFragment extends Fragment {
     List<Article> articleList = new ArrayList<>();
     ArticleAdapter adapter;
     SharedPreferences preferences;
-    public static ArticleFragment af;
     public ArticleFragment() {
         // Required empty public constructor
     }

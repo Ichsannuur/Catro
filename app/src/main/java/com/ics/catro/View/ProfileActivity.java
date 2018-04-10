@@ -2,7 +2,9 @@ package com.ics.catro.View;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -11,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ics.catro.API.CatroAPI;
@@ -34,6 +37,8 @@ public class ProfileActivity extends Fragment {
     RecyclerView recyclerView;
     List<Profile> profileList = new ArrayList<>();
     ProfileAdapter adapter;
+    TextView nama_pengguna;
+    SharedPreferences preferences;
     public ProfileActivity() {
         // Required empty public constructor
     }
@@ -42,9 +47,12 @@ public class ProfileActivity extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        //Preference
+        preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
         recyclerView = (RecyclerView)v.findViewById(R.id.recyclerview);
+        nama_pengguna = (TextView)v.findViewById(R.id.nama_pengguna);
         recyclerView.setHasFixedSize(true);
         return v;
     }
@@ -56,7 +64,7 @@ public class ProfileActivity extends Fragment {
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
 
         CatroAPI api = RetrofitService.service().create(CatroAPI.class);
-        Call<Value> call = api.show_article_profile();
+        Call<Value> call = api.show_article_profile(preferences.getString("emailId",""));
         call.enqueue(new Callback<Value>() {
             @Override
             public void onResponse(Call<Value> call, Response<Value> response) {

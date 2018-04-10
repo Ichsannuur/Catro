@@ -36,8 +36,8 @@ public interface CatroAPI {
                             @Part MultipartBody.Part file, @Part("file")RequestBody name,
                             @Part("tgl_posting")RequestBody tgl_posting);
 
-    @GET("show_article_profile.php")
-    Call<Value> show_article_profile();
+    @GET("show_article_profile.php/email")
+    Call<Value> show_article_profile(@Query("email") String email);
 
     @GET("show_article.php/email")
     Call<Value> show_article(@Query("email") String email);

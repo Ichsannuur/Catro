@@ -49,10 +49,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#F5F5F5F5"
-                android:hint="E - Mail"
+                android:hint="Username"
                 android:paddingLeft="10dp"
                 android:padding="10dp"
-                android:id="@+id/email"
+                android:id="@+id/username"
                 android:textColorHint="#61616161"
                 />
 
@@ -60,39 +60,54 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#F5F5F5F5"
-                android:hint="Password"
+                android:hint="Tanggal Lahir"
                 android:paddingLeft="10dp"
-                android:inputType="textPassword"
                 android:padding="10dp"
-                android:layout_below="@+id/email"
+                android:layout_below="@+id/username"
                 android:layout_marginTop="10dp"
-                android:id="@+id/password"
+                android:id="@+id/tgl_lahir"
                 android:textColorHint="#61616161"
                 />
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#F5F5F5F5"
-                android:hint="Re-Type Password"
+                android:hint="Nomor Telepon"
                 android:paddingLeft="10dp"
-                android:inputType="textPassword"
+                android:inputType="number"
                 android:padding="10dp"
-                android:layout_below="@+id/password"
+                android:layout_below="@+id/tgl_lahir"
                 android:layout_marginTop="10dp"
-                android:id="@+id/password_re"
+                android:id="@+id/no_tlp"
                 android:textColorHint="#61616161"
                 />
 
-            <Button
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimaryDark"
-                android:text="Next"
+                android:weightSum="2"
+                android:layout_below="@+id/no_tlp"
                 android:layout_marginTop="10dp"
-                android:textColor="@android:color/white"
-                android:layout_below="@+id/password_re"
-                android:id="@+id/next"
-                />
+                >
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:text="Previous"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/white"
+                    android:id="@+id/prev"
+                    />
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimaryDark"
+                    android:text="Next"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/white"
+                    android:id="@+id/next"
+                    />
+            </LinearLayout>
 
         </RelativeLayout>
 

@@ -8,7 +8,12 @@ public class Profile {
     int id_article;
     String article;
     String gambar;
+    String username;
     String tgl_posting;
+
+    public String getUsername() {
+        return username;
+    }
 
     public int getId_article() {
         return id_article;
