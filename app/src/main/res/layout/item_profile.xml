@@ -9,6 +9,7 @@
         android:layout_height="match_parent"
         android:id="@+id/articleImage"
         android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
         />
     <TextView
         android:layout_width="wrap_content"

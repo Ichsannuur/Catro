@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -59,7 +58,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
         }else{
             holder.likeIcon.setChecked(false);
         }
-        Picasso.with(context).load(R.drawable.yeezy).into(holder.articleImage);
+        Picasso.with(context).load("http://10.0.2.2/catro/image/"+article.getGambar()).into(holder.articleImage);
     }
 
     @Override
@@ -82,12 +81,6 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
             tgl_profile = (TextView)itemView.findViewById(R.id.tgl_profile);
             articleImage = (ImageView) itemView.findViewById(R.id.article_image);
 
-            likeIcon.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-
-                }
-            });
             likeIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

@@ -38,7 +38,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
     public void onBindViewHolder(ViewHolder holder, int position) {
         Profile object = profileList.get(position);
         holder.text.setText(object.getGambar());
-        Picasso.with(context).load("http://10.0.2.2/catro/image/"+object.getGambar()).resize(600,450).centerCrop().into(holder.articleImage);
+        Picasso.with(context).load("http://10.0.2.2/catro/image/"+object.getGambar()).into(holder.articleImage);
     }
 
     @Override
