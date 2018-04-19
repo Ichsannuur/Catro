@@ -24,7 +24,11 @@ public interface CatroAPI {
     @FormUrlEncoded
     @POST("register_user.php")
     Call<Value> registerUser(@Field("email") String email,
-                             @Field("password") String password);
+                             @Field("username") String username,
+                             @Field("password") String password,
+                             @Field("tgl_lahir") String tgl_lahir,
+                             @Field("no_tlp") String no_tlp,
+                             @Field("jenis_kelamin") String jenis_kelamin);
 
     @FormUrlEncoded
     @POST("login_user.php")

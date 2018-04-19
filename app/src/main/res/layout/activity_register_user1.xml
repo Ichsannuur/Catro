@@ -51,6 +51,7 @@
                 android:background="#F5F5F5F5"
                 android:hint="Username"
                 android:paddingLeft="10dp"
+                android:maxLength="25"
                 android:padding="10dp"
                 android:id="@+id/username"
                 android:textColorHint="#61616161"
@@ -62,6 +63,9 @@
                 android:background="#F5F5F5F5"
                 android:hint="Tanggal Lahir"
                 android:paddingLeft="10dp"
+                android:clickable="true"
+                android:focusable="false"
+                android:longClickable="false"
                 android:padding="10dp"
                 android:layout_below="@+id/username"
                 android:layout_marginTop="10dp"
@@ -79,14 +83,39 @@
                 android:layout_below="@+id/tgl_lahir"
                 android:layout_marginTop="10dp"
                 android:id="@+id/no_tlp"
+                android:maxLength="13"
                 android:textColorHint="#61616161"
                 />
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/no_tlp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:id="@+id/radioGroup"
+                >
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/male"
+                    android:layout_weight="1"
+                    android:text="Pria"
+                    />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/female"
+                    android:text="Wanita"
+                    />
+
+            </RadioGroup>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:weightSum="2"
-                android:layout_below="@+id/no_tlp"
+                android:layout_below="@+id/radioGroup"
                 android:layout_marginTop="10dp"
                 >
                 <Button
@@ -102,7 +131,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/colorPrimaryDark"
-                    android:text="Next"
+                    android:text="Save"
                     android:layout_weight="1"
                     android:textColor="@android:color/white"
                     android:id="@+id/next"

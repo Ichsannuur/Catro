@@ -35,9 +35,9 @@ public class LoginActivity extends AppCompatActivity {
         //Preference
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        if (preferences.getString("emailId","") != null){
-            startActivity(new Intent(LoginActivity.this,MenuActivity.class));
-        }
+//        if (preferences.getString("emailId","") != null){
+//            startActivity(new Intent(LoginActivity.this,MenuActivity.class));
+//        }
 
         judul = (TextView)findViewById(R.id.judul);
         progressDialog = new ProgressDialog(this);
