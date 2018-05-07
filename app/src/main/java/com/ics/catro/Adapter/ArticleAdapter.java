@@ -17,6 +17,8 @@ import com.ics.catro.Object.Value;
 import com.ics.catro.R;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -87,9 +89,15 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
             likeIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+                    String time = new SimpleDateFormat("HH:mm:ss").format(new Date());
+
                     if (likeIcon.isChecked()){
                         CatroAPI api = RetrofitService.service().create(CatroAPI.class);
-                        Call<Value> call = api.insert_like("1",id_article.getText().toString(),sessionUser,Integer.parseInt(id_like.getText().toString()));
+                        Call<Value> call = api.insert_like("1",id_article.getText().toString(),
+                                sessionUser,
+                                Integer.parseInt(id_like.getText().toString()),
+                                date,time);
                         call.enqueue(new Callback<Value>() {
                             @Override
                             public void onResponse(Call<Value> call, Response<Value> response) {
@@ -108,7 +116,9 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
                         });
                     }else{
                         CatroAPI api = RetrofitService.service().create(CatroAPI.class);
-                        Call<Value> call = api.insert_like("0",id_article.getText().toString(),sessionUser,Integer.parseInt(id_like.getText().toString()));
+                        Call<Value> call = api.insert_like("0",id_article.getText().toString(),
+                                sessionUser,
+                                Integer.parseInt(id_like.getText().toString()),date,time);
                         call.enqueue(new Callback<Value>() {
                             @Override
                             public void onResponse(Call<Value> call, Response<Value> response) {

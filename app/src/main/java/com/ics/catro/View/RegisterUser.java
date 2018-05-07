@@ -47,8 +47,8 @@ public class RegisterUser extends AppCompatActivity {
             }else{
                 if (password.getText().toString().equals(password_re.getText().toString())){
                     i = new Intent(RegisterUser.this,RegisterUser1.class);
-                    i.putExtra("email",email.getText().toString().trim());
-                    i.putExtra("password",password.getText().toString().trim());
+                    i.putExtra("email1",email.getText().toString().trim());
+                    i.putExtra("password1",password.getText().toString().trim());
                     startActivity(i);
                 }else{
                     error.setText("* Password Berbeda");

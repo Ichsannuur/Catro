@@ -21,14 +21,18 @@ import retrofit2.http.Query;
  */
 
 public interface CatroAPI {
-    @FormUrlEncoded
     @POST("register_user.php")
-    Call<Value> registerUser(@Field("email") String email,
-                             @Field("username") String username,
-                             @Field("password") String password,
-                             @Field("tgl_lahir") String tgl_lahir,
-                             @Field("no_tlp") String no_tlp,
-                             @Field("jenis_kelamin") String jenis_kelamin);
+    @Multipart
+    Call<Value> registerUser(@Part("email") RequestBody email,
+                             @Part("username") RequestBody username,
+                             @Part("password") RequestBody password,
+                             @Part MultipartBody.Part file,
+                             @Part("file") RequestBody name,
+                             @Part("tgl_lahir") RequestBody tgl_lahir,
+                             @Part("no_tlp") RequestBody no_tlp,
+                             @Part("jenis_kelamin") RequestBody jenis_kelamin,
+                             @Part("tgl_join") RequestBody tgl_join,
+                             @Part("time_join") RequestBody time_join);
 
     @FormUrlEncoded
     @POST("login_user.php")
@@ -37,7 +41,8 @@ public interface CatroAPI {
     @POST("add_article.php")
     @Multipart
     Call<Value> add_article(@Part("article") RequestBody article,
-                            @Part MultipartBody.Part file, @Part("file")RequestBody name,
+                            @Part MultipartBody.Part file,
+                            @Part("file")RequestBody name,
                             @Part("tgl_posting")RequestBody tgl_posting);
 
     @GET("show_article_profile.php/email")
@@ -46,6 +51,11 @@ public interface CatroAPI {
     @GET("show_article.php/email")
     Call<Value> show_article(@Query("email") String email);
 
-    @GET("insert_like.php/option/id_article/email/id_like")
-    Call<Value> insert_like(@Query("option") String option,@Query("id_article") String id_article,@Query("email") String email,@Query("id_like") int id_like);
+    @GET("insert_like.php/option/id_article/email/id_like/tgl_like/time_like")
+    Call<Value> insert_like(@Query("option") String option,
+                            @Query("id_article") String id_article,
+                            @Query("email") String email,
+                            @Query("id_like") int id_like,
+                            @Query("tgl_like") String tgl_like,
+                            @Query("time_like") String time_like);
 }

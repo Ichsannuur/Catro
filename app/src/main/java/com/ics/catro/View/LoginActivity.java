@@ -22,7 +22,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
-    TextView judul,error;
+    TextView judul,error,register;
     EditText email,password;
     Button login;
     ProgressDialog progressDialog;
@@ -53,6 +53,13 @@ public class LoginActivity extends AppCompatActivity {
                 progressDialog.setMessage("Loading");
                 progressDialog.show();
                 Flogin();
+            }
+        });
+
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),RegisterUser.class));
             }
         });
     }
@@ -93,6 +100,7 @@ public class LoginActivity extends AppCompatActivity {
         email = (EditText)findViewById(R.id.email);
         password = (EditText)findViewById(R.id.password);
         login = (Button)findViewById(R.id.login);
+        register = (TextView)findViewById(R.id.register);
         error = (TextView)findViewById(R.id.error);
     }
 

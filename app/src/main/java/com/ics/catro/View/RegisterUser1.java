@@ -23,6 +23,7 @@ import com.ics.catro.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 import retrofit2.Call;
@@ -32,10 +33,9 @@ import retrofit2.Response;
 public class RegisterUser1 extends AppCompatActivity {
     TextView judul,error;
     EditText username,tgl_lahir,no_tlp;
-    Button save,prev;
+    Button next,prev;
     Calendar myCalendar;
-    ProgressDialog dialog;
-    String optionGender;
+    String optionGender,email,password;
     Intent i;
     RadioGroup radioGroup;
     RadioButton radioGender;
@@ -46,10 +46,11 @@ public class RegisterUser1 extends AppCompatActivity {
         setContentView(R.layout.activity_register_user1);
         judul = (TextView)findViewById(R.id.judul);
         error = (TextView)findViewById(R.id.error);
-        i = getIntent();
         intiate_UI();
+        i = getIntent();
+        email = i.getStringExtra("email1");
+        password = i.getStringExtra("password1");
         myCalendar = Calendar.getInstance();
-        dialog = new ProgressDialog(this);
 
         //Font
         Typeface typeFace = Typeface.createFromAsset(getAssets(), "font/streetwear.ttf");
@@ -74,24 +75,29 @@ public class RegisterUser1 extends AppCompatActivity {
         };
 
 
-        save.setOnClickListener(new View.OnClickListener() {
+        next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog.setMessage("Loading");
-                dialog.show();
-                if (username.getText().toString().equals("") || tgl_lahir.getText().toString().equals("") || no_tlp.getText().toString().equals("")){
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                radioGender = (RadioButton)findViewById(selectedId);
+
+                if (username.getText().toString().equals("") || tgl_lahir.getText().toString().equals("") || no_tlp.getText().toString().equals("") || radioGroup.getCheckedRadioButtonId() == -1){
                     error.setText("* Isi terlebih dahulu");
                     error.setVisibility(View.VISIBLE);
-                    dialog.dismiss();
                 }else{
-                    int selectedId = radioGroup.getCheckedRadioButtonId();
-                    radioGender = (RadioButton)findViewById(selectedId);
                     if (selectedId == R.id.male){
                         optionGender = "L";
                     }else{
                         optionGender = "P";
                     }
-                    register(optionGender);
+                    i = new Intent(getApplicationContext(),FinalRegister.class);
+                    i.putExtra("username",username.getText().toString());
+                    i.putExtra("tgl_lahir",tgl_lahir.getText().toString());
+                    i.putExtra("email",email);
+                    i.putExtra("password",password);
+                    i.putExtra("no_tlp",no_tlp.getText().toString().trim());
+                    i.putExtra("jenis_kelamin",optionGender);
+                    startActivity(i);
                 }
             }
         });
@@ -113,47 +119,51 @@ public class RegisterUser1 extends AppCompatActivity {
         });
     }
 
-    private void register(String gender) {
-        CatroAPI api = RetrofitService.service().create(CatroAPI.class);
-        Call<Value> call = api.registerUser(i.getStringExtra("email"),
-                username.getText().toString().trim(),
-                i.getStringExtra("password"),
-                tgl_lahir.getText().toString().trim(),
-                no_tlp.getText().toString().trim(),
-                gender);
-
-        call.enqueue(new Callback<Value>() {
-            @Override
-            public void onResponse(Call<Value> call, Response<Value> response) {
-                String value = response.body().getValue();
-                String message = response.body().getMessage();
-
-                if (value.equals("1")){
-                    error.setVisibility(View.GONE);
-                    Toast.makeText(RegisterUser1.this, message, Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(getApplicationContext(),LoginActivity.class));
-                    dialog.dismiss();
-                }else if(value.equals("5")){
-                    error.setText("* " + message);
-                    error.setVisibility(View.VISIBLE);
-                }else{
-                    error.setText("* " + message);
-                    error.setVisibility(View.VISIBLE);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Value> call, Throwable t) {
-                t.printStackTrace();
-                Log.e("ERROR",t.getMessage());
-                dialog.dismiss();
-            }
-        });
-    }
+//    private void register(String gender) {
+//        String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+//        String time = new SimpleDateFormat("HH:mm:ss").format(new Date());
+//        CatroAPI api = RetrofitService.service().create(CatroAPI.class);
+//        Call<Value> call = api.registerUser(i.getStringExtra("email"),
+//                username.getText().toString().trim(),
+//                i.getStringExtra("password"),
+//                tgl_lahir.getText().toString().trim(),
+//                no_tlp.getText().toString().trim(),
+//                gender,
+//                date,
+//                time);
+//
+//        call.enqueue(new Callback<Value>() {
+//            @Override
+//            public void onResponse(Call<Value> call, Response<Value> response) {
+//                String value = response.body().getValue();
+//                String message = response.body().getMessage();
+//
+//                if (value.equals("1")){
+//                    error.setVisibility(View.GONE);
+//                    Toast.makeText(RegisterUser1.this, message, Toast.LENGTH_SHORT).show();
+//                    startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+//                    dialog.dismiss();
+//                }else if(value.equals("5")){
+//                    error.setText("* " + message);
+//                    error.setVisibility(View.VISIBLE);
+//                }else{
+//                    error.setText("* " + message);
+//                    error.setVisibility(View.VISIBLE);
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Value> call, Throwable t) {
+//                t.printStackTrace();
+//                Log.e("ERROR",t.getMessage());
+//                dialog.dismiss();
+//            }
+//        });
+//    }
 
     private void intiate_UI() {
         prev = (Button)findViewById(R.id.prev);
-        save = (Button)findViewById(R.id.next);
+        next = (Button)findViewById(R.id.next);
         username = (EditText)findViewById(R.id.username);
         radioGroup = (RadioGroup)findViewById(R.id.radioGroup);
         tgl_lahir = (EditText)findViewById(R.id.tgl_lahir);
