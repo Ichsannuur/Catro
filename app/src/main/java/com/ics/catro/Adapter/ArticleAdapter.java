@@ -54,16 +54,18 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
         holder.user_profile.setText(article.getUsername());
         holder.id_like.setText(article.getId_like() + "");
         holder.id_article.setText(article.getId_article() + "");
-        holder.email.setText(article.getEmail());
-        holder.tgl_profile.setText(article.getTgl_posting());
+        holder.email.setText(article.getUsername());
+        holder.tgl_profile.setText(article.getTgl_posting() + " " +article.getTime_posting());
+        holder.article_detail.setText(article.getArticle());
         holder.countLiked.setText(article.getCountLiked() + "");
         if(article.getIsLiked() == 1){
             holder.likeIcon.setChecked(true);
         }else{
             holder.likeIcon.setChecked(false);
         }
-        Picasso.with(context).load("http://10.0.2.2/catro/image/"+article.getGambar())
-                .into(holder.articleImage);
+        Picasso.with(context).load("http://10.0.2.2/catro/image/"+article.getGambar()).into(holder.articleImage);
+        Picasso.with(context).load("http://10.0.2.2/catro/user_image/"+article.getUser_image()).into(holder.imageProfile);
+
     }
 
     @Override
@@ -72,16 +74,18 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView user_profile,tgl_profile,countLiked,id_article,email,id_like;
-        ImageView articleImage;
+        TextView user_profile,tgl_profile,countLiked,id_article,email,id_like,article_detail;
+        ImageView articleImage,imageProfile;
         CheckBox likeIcon;
         public ViewHolder(View itemView) {
             super(itemView);
             likeIcon = (CheckBox)itemView.findViewById(R.id.likeIcon);
             user_profile = (TextView)itemView.findViewById(R.id.user_profile);
             email = (TextView)itemView.findViewById(R.id.email);
+            imageProfile = (ImageView)itemView.findViewById(R.id.image_profile);
             id_like = (TextView)itemView.findViewById(R.id.id_like);
             id_article = (TextView)itemView.findViewById(R.id.id_article);
+            article_detail = (TextView)itemView.findViewById(R.id.article_detail);
             countLiked = (TextView)itemView.findViewById(R.id.count);
             tgl_profile = (TextView)itemView.findViewById(R.id.tgl_profile);
             articleImage = (ImageView) itemView.findViewById(R.id.article_image);

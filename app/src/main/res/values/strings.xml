@@ -2,7 +2,7 @@
     <string name="app_name">Catro</string>
     <string name="title_activity_menu">MenuActivity</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Upload</string>
+    <string name="title_dashboard">Search</string>
     <string name="title_user">Profile</string>
 
     <!-- TODO: Remove or change this placeholder text -->

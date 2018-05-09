@@ -14,9 +14,14 @@ public class Value {
     String message;
     List<Profile> profile;
     List<Article> article;
+    List<SearchProfile> searchProfile;
 
     public List<Article> getArticle() {
         return article;
+    }
+
+    public List<SearchProfile> getSearchProfile() {
+        return searchProfile;
     }
 
     public List<Profile> getProfileList() {

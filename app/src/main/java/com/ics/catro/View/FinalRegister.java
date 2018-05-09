@@ -137,6 +137,13 @@ public class FinalRegister extends AppCompatActivity {
                     dialog.dismiss();
                     startActivity(new Intent(getApplicationContext(),LoginActivity.class));
                     Toast.makeText(FinalRegister.this, message, Toast.LENGTH_SHORT).show();
+                    //Remove Intent
+                    i.removeExtra("email");
+                    i.removeExtra("password");
+                    i.removeExtra("username");
+                    i.removeExtra("tgl_lahir");
+                    i.removeExtra("no_tlp");
+
                 }else if(value.equals("5")){
                     dialog.dismiss();
                     error.setText("* " + message);

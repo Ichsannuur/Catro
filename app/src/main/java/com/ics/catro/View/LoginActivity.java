@@ -11,9 +11,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ics.catro.API.CatroAPI;
 import com.ics.catro.API.RetrofitService;
+import com.ics.catro.Object.Login;
 import com.ics.catro.Object.Value;
 import com.ics.catro.R;
 
@@ -35,9 +37,11 @@ public class LoginActivity extends AppCompatActivity {
         //Preference
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-//        if (preferences.getString("emailId","") != null){
-//            startActivity(new Intent(LoginActivity.this,MenuActivity.class));
-//        }
+        if (preferences.contains("emailId")){
+            startActivity(new Intent(LoginActivity.this,MenuActivity.class));
+            finish();
+        }
+
 
         judul = (TextView)findViewById(R.id.judul);
         progressDialog = new ProgressDialog(this);
@@ -66,10 +70,11 @@ public class LoginActivity extends AppCompatActivity {
 
     private void Flogin() {
         CatroAPI api = RetrofitService.service().create(CatroAPI.class);
-        Call<Value> call = api.login(email.getText().toString().trim(),password.getText().toString().trim());
-        call.enqueue(new Callback<Value>() {
+//        Call<Login> call = api.login(email.getText().toString().trim(),password.getText().toString().trim());
+        Call<Login> call = api.login(email.getText().toString().trim(),password.getText().toString().trim());
+        call.enqueue(new Callback<Login>() {
             @Override
-            public void onResponse(Call<Value> call, Response<Value> response) {
+            public void onResponse(Call<Login> call, Response<Login> response) {
                 String value = response.body().getValue();
                 String message = response.body().getMessage();
 
@@ -78,6 +83,8 @@ public class LoginActivity extends AppCompatActivity {
                     //Put session
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.putString("emailId",email.getText().toString());
+                    editor.putString("getUsername",response.body().getUsername());
+                    editor.putString("getImage",response.body().getImage());
                     editor.apply();
                     startActivity(new Intent(LoginActivity.this, MenuActivity.class));
                     clear_UI();
@@ -90,10 +97,45 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Value> call, Throwable t) {
+            public void onFailure(Call<Login> call, Throwable t) {
+                progressDialog.dismiss();
+                Toast.makeText(LoginActivity.this, "No Response", Toast.LENGTH_SHORT).show();
                 t.printStackTrace();
             }
         });
+//        call.enqueue(new Callback<Login>() {
+//            @Override
+//            public void onResponse(Call<Login> call, Response<Login> response) {
+//                String value = response.body().getValue();
+//                String message = response.body().getMessage();
+//                String getUsername = response.body().getUsername();
+//                String getImage = response.body().getImage();
+//
+//                if (value.equals("1")){
+//                    progressDialog.dismiss();
+//                    //Put session
+//                    SharedPreferences.Editor editor = preferences.edit();
+//                    editor.putString("emailId",email.getText().toString());
+//                    editor.putString("getUsername",getUsername);
+//                    editor.putString("getImage",getImage);
+//                    editor.apply();
+//                    startActivity(new Intent(LoginActivity.this, MenuActivity.class));
+//                    clear_UI();
+//                }else{
+//                    progressDialog.dismiss();
+//                    error.setVisibility(View.VISIBLE);
+//                    error.setText("*" + message);
+//                    clear_UI();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Login> call, Throwable t) {
+//                progressDialog.dismiss();
+//                Toast.makeText(LoginActivity.this, "No Response", Toast.LENGTH_SHORT).show();
+//                t.printStackTrace();
+//             }
+//           });
     }
 
     private void intiate_UI() {

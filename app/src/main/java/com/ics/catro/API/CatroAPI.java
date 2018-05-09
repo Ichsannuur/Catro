@@ -1,5 +1,6 @@
 package com.ics.catro.API;
 
+import com.ics.catro.Object.Login;
 import com.ics.catro.Object.Value;
 import com.ics.catro.View.RegisterUser;
 
@@ -36,7 +37,7 @@ public interface CatroAPI {
 
     @FormUrlEncoded
     @POST("login_user.php")
-    Call<Value> login(@Field("email") String email,@Field("password") String password);
+    Call<Login> login(@Field("email") String email, @Field("password") String password);
 
     @POST("add_article.php")
     @Multipart
@@ -58,4 +59,7 @@ public interface CatroAPI {
                             @Query("id_like") int id_like,
                             @Query("tgl_like") String tgl_like,
                             @Query("time_like") String time_like);
+    @FormUrlEncoded
+    @POST("search_profile.php")
+    Call<Value> search_profile(@Field("search") String search);
 }

@@ -10,6 +10,8 @@
         android:text="Catro"
         android:textColor="#ffffff"
         android:id="@+id/judul"
-        android:textSize="29sp" />
+        android:textSize="29sp"
+        android:layout_marginLeft="10dp"
+        />
 
 </LinearLayout>
