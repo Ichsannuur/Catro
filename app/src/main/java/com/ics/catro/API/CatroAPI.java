@@ -39,6 +39,10 @@ public interface CatroAPI {
     @POST("login_user.php")
     Call<Login> login(@Field("email") String email, @Field("password") String password);
 
+    @FormUrlEncoded
+    @POST("insert_follow.php")
+    Call<Value> insert_follow(@Field("email") String email, @Field("username") String username,@Field("time") String time);
+
     @POST("add_article.php")
     @Multipart
     Call<Value> add_article(@Part("article") RequestBody article,
@@ -49,8 +53,17 @@ public interface CatroAPI {
     @GET("show_article_profile.php/email")
     Call<Value> show_article_profile(@Query("email") String email);
 
+    @GET("check_followed.php/email/email_followed")
+    Call<Value> check_followed(@Query("email") String email,@Query("username_followed") String username_followed);
+
+    @GET("unfollow.php/email/email_followed")
+    Call<Value> unfollow(@Query("email") String email,@Query("username_followed") String username_followed);
+
     @GET("show_article.php/email")
     Call<Value> show_article(@Query("email") String email);
+
+    @GET("show_other_profile.php/username")
+    Call<Value> show_other_profile(@Query("username") String username);
 
     @GET("insert_like.php/option/id_article/email/id_like/tgl_like/time_like")
     Call<Value> insert_like(@Query("option") String option,

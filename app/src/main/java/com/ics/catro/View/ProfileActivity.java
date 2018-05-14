@@ -41,7 +41,7 @@ public class ProfileActivity extends Fragment {
     RecyclerView recyclerView;
     List<Profile> profileList = new ArrayList<>();
     ProfileAdapter adapter;
-    TextView nama_pengguna;
+    TextView nama_pengguna,followers,followed,score;
     Button logout;
     ImageView image_profile;
     SharedPreferences preferences;
@@ -59,6 +59,9 @@ public class ProfileActivity extends Fragment {
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
         recyclerView = (RecyclerView)v.findViewById(R.id.recyclerview);
         nama_pengguna = (TextView)v.findViewById(R.id.nama_pengguna);
+        followers = (TextView)v.findViewById(R.id.followers);
+        score = (TextView)v.findViewById(R.id.score);
+        followed = (TextView)v.findViewById(R.id.followed);
         image_profile = (ImageView)v.findViewById(R.id.image_profile);
         logout = (Button)v.findViewById(R.id.logout);
         //Set data from login user
@@ -72,7 +75,7 @@ public class ProfileActivity extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        load_data_user();
         //Logout Function
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,6 +100,29 @@ public class ProfileActivity extends Fragment {
                     profileList = response.body().getProfileList();
                     adapter = new ProfileAdapter(getActivity(),profileList);
                     recyclerView.setAdapter(adapter);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Value> call, Throwable t) {
+                Toast.makeText(getContext(), "Gagal", Toast.LENGTH_SHORT).show();
+                t.printStackTrace();
+            }
+        });
+    }
+
+    private void load_data_user() {
+        CatroAPI api = RetrofitService.service().create(CatroAPI.class);
+        Call<Value> call = api.show_article_profile(preferences.getString("emailId",""));
+        call.enqueue(new Callback<Value>() {
+            @Override
+            public void onResponse(Call<Value> call, Response<Value> response) {
+                String value = response.body().getValue();
+                if(value.equals("1")){
+                    profileList = response.body().getProfileList();
+                    followers.setText(profileList.get(0).getFollowers() + "");
+                    followed.setText(profileList.get(0).getFollowed() + "");
+                    score.setText(profileList.get(0).getScore());
                 }
             }
 

@@ -10,6 +10,21 @@ public class Profile {
     String gambar;
     String username;
     String tgl_posting;
+    int followers;
+    int followed;
+    String score;
+
+    public String getScore() {
+        return score;
+    }
+
+    public int getFollowers() {
+        return followers;
+    }
+
+    public int getFollowed() {
+        return followed;
+    }
 
     public String getUsername() {
         return username;

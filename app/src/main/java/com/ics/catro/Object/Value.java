@@ -15,6 +15,11 @@ public class Value {
     List<Profile> profile;
     List<Article> article;
     List<SearchProfile> searchProfile;
+    List<OtherProfile> otherProfile;
+
+    public List<OtherProfile> getOtherProfile() {
+        return otherProfile;
+    }
 
     public List<Article> getArticle() {
         return article;

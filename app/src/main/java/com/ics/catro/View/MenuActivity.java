@@ -1,6 +1,7 @@
 package com.ics.catro.View;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,6 +23,7 @@ import com.ics.catro.R;
 public class MenuActivity extends AppCompatActivity {
 
     TextView judul;
+    BottomNavigationView navigation;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -40,11 +43,10 @@ public class MenuActivity extends AppCompatActivity {
                     break;
             }
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.content,fragment);
+            transaction.replace(R.id.content,fragment).addToBackStack("tag");
             transaction.commit();
             return true;
         }
-
     };
 
     @Override
@@ -55,12 +57,11 @@ public class MenuActivity extends AppCompatActivity {
         getSupportActionBar().setCustomView(R.layout.bar_layout);
 
         judul = (TextView)findViewById(R.id.judul);
-
         //Font
         Typeface typeFace = Typeface.createFromAsset(getAssets(), "font/streetwear.ttf");
         judul.setTypeface(typeFace);
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         //First Tab show in fragment
@@ -101,7 +102,7 @@ public class MenuActivity extends AppCompatActivity {
                             break;
 
                         case R.id.gallery:
-                            Toast.makeText(MenuActivity.this, "Gallery", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(getApplicationContext(),AddArticle.class));
                             break;
                     }
                 }

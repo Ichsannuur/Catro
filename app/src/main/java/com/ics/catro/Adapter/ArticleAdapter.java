@@ -1,6 +1,7 @@
 package com.ics.catro.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,8 @@ import com.ics.catro.API.RetrofitService;
 import com.ics.catro.Object.Article;
 import com.ics.catro.Object.Value;
 import com.ics.catro.R;
+import com.ics.catro.View.DetailOtherUser;
+import com.ics.catro.View.MenuActivity;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
@@ -58,6 +61,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
         holder.tgl_profile.setText(article.getTgl_posting() + " " +article.getTime_posting());
         holder.article_detail.setText(article.getArticle());
         holder.countLiked.setText(article.getCountLiked() + "");
+        holder.textImage.setText(article.getUser_image());
         if(article.getIsLiked() == 1){
             holder.likeIcon.setChecked(true);
         }else{
@@ -74,7 +78,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView user_profile,tgl_profile,countLiked,id_article,email,id_like,article_detail;
+        TextView user_profile,tgl_profile,countLiked,id_article,email,id_like,article_detail,textImage;
         ImageView articleImage,imageProfile;
         CheckBox likeIcon;
         public ViewHolder(View itemView) {
@@ -89,6 +93,15 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
             countLiked = (TextView)itemView.findViewById(R.id.count);
             tgl_profile = (TextView)itemView.findViewById(R.id.tgl_profile);
             articleImage = (ImageView) itemView.findViewById(R.id.article_image);
+            textImage = (TextView)itemView.findViewById(R.id.textImage);
+
+            //Show Profile Other User & Follow
+            user_profile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    show_or_follow();
+                }
+            });
 
             likeIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -142,6 +155,13 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
                     }
                 }
             });
+        }
+
+        private void show_or_follow() {
+            Intent i = new Intent(context, DetailOtherUser.class);
+            i.putExtra("other_username",user_profile.getText().toString());
+            i.putExtra("other_userImage",textImage.getText().toString());
+            context.startActivity(i);
         }
     }
 }

@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.ics.catro.View.ProfileActivity">
+    tools:context="com.ics.catro.View.DetailOtherUser">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="96dp"
                     android:layout_height="96dp"
-                    android:id="@+id/image_profile"
+                    android:id="@+id/other_image_profile"
                     android:src="@drawable/ichsan"
                     app:civ_border_width="2dp"
                     app:civ_border_color="@android:color/darker_gray"
@@ -35,8 +35,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/nama_pengguna"
-                    android:layout_below="@+id/image_profile"
+                    android:id="@+id/other_user"
+                    android:layout_below="@+id/other_image_profile"
                     android:layout_marginTop="10dp"
                     android:textSize="15sp"
                     android:layout_gravity="center"
@@ -69,8 +69,8 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/score"
                             android:textSize="20sp"
+                            android:id="@+id/score"
                             android:textAlignment="center"
                             android:layout_gravity="center"
                             android:textColor="@android:color/white"
@@ -116,8 +116,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="20sp"
-                            android:id="@+id/followed"
                             android:textAlignment="center"
+                            android:id="@+id/followed"
                             android:layout_gravity="center"
                             android:textColor="@android:color/white"
                             />
@@ -130,34 +130,32 @@
                             />
                     </LinearLayout>
                 </LinearLayout>
-                <LinearLayout
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:weightSum="2"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal"
                     >
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Profile"
+                        android:text="Follow"
                         android:textSize="11sp"
                         android:background="@color/colorPrimary"
-                        android:id="@+id/profile"
+                        android:id="@+id/follow"
                         android:textColor="@android:color/white"
-                        android:layout_weight="1"
                         />
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:text="UnFollow"
                         android:textSize="11sp"
-                        android:id="@+id/logout"
+                        android:visibility="invisible"
                         android:background="@color/colorPrimaryDark"
+                        android:id="@+id/unfollow"
                         android:textColor="@android:color/white"
-                        android:text="Logout"
-                        android:layout_weight="1"
                         />
-                </LinearLayout>
+                </FrameLayout>
             </LinearLayout>
 
         </RelativeLayout>
@@ -166,7 +164,7 @@
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/recyclerview"
+        android:id="@+id/recyclerOtherUser"
         >
 
     </android.support.v7.widget.RecyclerView>
