@@ -1,0 +1,151 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/gradient"
+    android:padding="10dp"
+    tools:context="com.ics.catro.View.UpdateProfile">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/judul"
+        android:textSize="50sp"
+        android:text="Catro"
+        android:layout_marginTop="10dp"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/judul"
+        android:textAlignment="center"
+        android:id="@+id/error"
+        android:text="* Error message"
+        android:visibility="gone"
+        android:textColor="@android:color/white"
+        />
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/error"
+            android:layout_marginTop="10dp"
+            android:layout_centerVertical="true"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/bar1"
+                    >
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:id="@+id/image_profile"
+                        android:src="@drawable/placeholderuser"
+                        app:civ_border_width="2dp"
+                        app:civ_border_color="@android:color/darker_gray"
+                        />
+
+                    <TextView
+                        android:id="@+id/email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="15dp"
+                        android:layout_toEndOf="@+id/image_profile"
+                        android:hint="E - Mail"
+                        android:padding="10dp"
+                        android:textColorHint="#61616161" />
+
+                </RelativeLayout>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#F5F5F5F5"
+                    android:hint="Username"
+                    android:paddingLeft="10dp"
+                    android:padding="10dp"
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/username"
+                    android:textColorHint="#61616161"
+                    android:layout_below="@+id/bar1"
+                    />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#F5F5F5F5"
+                    android:hint="Tgl Lahir"
+                    android:paddingLeft="10dp"
+                    android:padding="10dp"
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/tgl_lahir"
+                    android:longClickable="false"
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:textColorHint="#61616161"
+                    android:layout_below="@+id/username"
+                    />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#F5F5F5F5"
+                    android:hint="Nomor Telepon"
+                    android:paddingLeft="10dp"
+                    android:inputType="number"
+                    android:padding="10dp"
+                    android:layout_below="@+id/tgl_lahir"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/no_tlp"
+                    android:maxLength="13"
+                    android:textColorHint="#61616161"
+                    />
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/no_tlp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:id="@+id/radioGroup"
+                    >
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/male"
+                        android:layout_weight="1"
+                        android:text="Pria"
+                        />
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/female"
+                        android:text="Wanita"
+                        />
+
+                </RadioGroup>
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/update"
+        android:text="Update"
+        android:background="@color/colorPrimary"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="10dp"
+        />
+</LinearLayout>

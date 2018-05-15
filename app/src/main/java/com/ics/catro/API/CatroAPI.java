@@ -50,6 +50,24 @@ public interface CatroAPI {
                             @Part("file")RequestBody name,
                             @Part("tgl_posting")RequestBody tgl_posting);
 
+    @POST("update_profile.php")
+    @Multipart
+    Call<Value> update_profile(@Part("email") RequestBody email,
+                               @Part MultipartBody.Part file,
+                               @Part("file")RequestBody name,
+                               @Part("username")RequestBody username,
+                               @Part("tgl_lahir")RequestBody tgl_lahir,
+                               @Part("no_tlp")RequestBody no_tlp,
+                               @Part("jenis_kelamin")RequestBody jenis_kelamin);
+
+    @POST("update_profile_withoutImage.php")
+    @FormUrlEncoded
+    Call<Value> update_profile_wihtout_image(@Field("email") String email,
+                               @Field("username")String username,
+                               @Field("tgl_lahir")String tgl_lahir,
+                               @Field("no_tlp")String no_tlp,
+                               @Field("jenis_kelamin")String jenis_kelamin);
+
     @GET("show_article_profile.php/email")
     Call<Value> show_article_profile(@Query("email") String email);
 

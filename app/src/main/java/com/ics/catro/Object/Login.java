@@ -9,6 +9,9 @@ public class Login {
     String message;
     String username;
     String image;
+    String tgl_lahir;
+    String no_tlp;
+    String jenis_kelamin;
 
     public String getUsername() {
         return username;
@@ -26,4 +29,15 @@ public class Login {
         return message;
     }
 
+    public String getTgl_lahir() {
+        return tgl_lahir;
+    }
+
+    public String getNo_tlp() {
+        return no_tlp;
+    }
+
+    public String getJenis_kelamin() {
+        return jenis_kelamin;
+    }
 }

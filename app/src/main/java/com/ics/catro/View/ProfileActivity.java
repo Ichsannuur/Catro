@@ -42,7 +42,7 @@ public class ProfileActivity extends Fragment {
     List<Profile> profileList = new ArrayList<>();
     ProfileAdapter adapter;
     TextView nama_pengguna,followers,followed,score;
-    Button logout;
+    Button logout,profile;
     ImageView image_profile;
     SharedPreferences preferences;
     public ProfileActivity() {
@@ -59,6 +59,7 @@ public class ProfileActivity extends Fragment {
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
         recyclerView = (RecyclerView)v.findViewById(R.id.recyclerview);
         nama_pengguna = (TextView)v.findViewById(R.id.nama_pengguna);
+        profile = (Button)v.findViewById(R.id.profile);
         followers = (TextView)v.findViewById(R.id.followers);
         score = (TextView)v.findViewById(R.id.score);
         followed = (TextView)v.findViewById(R.id.followed);
@@ -84,6 +85,14 @@ public class ProfileActivity extends Fragment {
                 SharedPreferences.Editor edit = preferences.edit();
                 edit.clear();
                 edit.commit();
+                getActivity().finish();
+            }
+        });
+
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity().getApplicationContext(),UpdateProfile.class));
                 getActivity().finish();
             }
         });

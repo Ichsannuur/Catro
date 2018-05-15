@@ -85,6 +85,9 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putString("emailId",email.getText().toString());
                     editor.putString("getUsername",response.body().getUsername());
                     editor.putString("getImage",response.body().getImage());
+                    editor.putString("getTgl_lahir",response.body().getTgl_lahir());
+                    editor.putString("getNo_Tlp",response.body().getNo_tlp());
+                    editor.putString("getJenisKelamin",response.body().getJenis_kelamin());
                     editor.apply();
                     startActivity(new Intent(LoginActivity.this, MenuActivity.class));
                     clear_UI();

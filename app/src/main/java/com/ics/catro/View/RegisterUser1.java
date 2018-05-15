@@ -119,47 +119,6 @@ public class RegisterUser1 extends AppCompatActivity {
         });
     }
 
-//    private void register(String gender) {
-//        String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-//        String time = new SimpleDateFormat("HH:mm:ss").format(new Date());
-//        CatroAPI api = RetrofitService.service().create(CatroAPI.class);
-//        Call<Value> call = api.registerUser(i.getStringExtra("email"),
-//                username.getText().toString().trim(),
-//                i.getStringExtra("password"),
-//                tgl_lahir.getText().toString().trim(),
-//                no_tlp.getText().toString().trim(),
-//                gender,
-//                date,
-//                time);
-//
-//        call.enqueue(new Callback<Value>() {
-//            @Override
-//            public void onResponse(Call<Value> call, Response<Value> response) {
-//                String value = response.body().getValue();
-//                String message = response.body().getMessage();
-//
-//                if (value.equals("1")){
-//                    error.setVisibility(View.GONE);
-//                    Toast.makeText(RegisterUser1.this, message, Toast.LENGTH_SHORT).show();
-//                    startActivity(new Intent(getApplicationContext(),LoginActivity.class));
-//                    dialog.dismiss();
-//                }else if(value.equals("5")){
-//                    error.setText("* " + message);
-//                    error.setVisibility(View.VISIBLE);
-//                }else{
-//                    error.setText("* " + message);
-//                    error.setVisibility(View.VISIBLE);
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Value> call, Throwable t) {
-//                t.printStackTrace();
-//                Log.e("ERROR",t.getMessage());
-//                dialog.dismiss();
-//            }
-//        });
-//    }
 
     private void intiate_UI() {
         prev = (Button)findViewById(R.id.prev);
